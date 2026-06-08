@@ -13,14 +13,20 @@ async def main():
         page = await context.new_page()
 
         # Define jobs
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        if os.path.exists(os.path.join(script_dir, "dennisbui.github.io")):
+            assets_dir = os.path.join(script_dir, "dennisbui.github.io/Portfolio_Assets/Ecommerce_Operations")
+        else:
+            assets_dir = os.path.join(script_dir, "../Portfolio_Assets/Ecommerce_Operations")
+            
         jobs = [
             {
                 "url": "https://st-unique.myshopify.com/",
-                "path": "D:/Projects/Upwork/dennisbui.github.io/Portfolio_Assets/Ecommerce_Operations/uma_store.png"
+                "path": os.path.join(assets_dir, "uma_store.png")
             },
             {
                 "url": "https://rozzy-store-demo.myshopify.com/",
-                "path": "D:/Projects/Upwork/dennisbui.github.io/Portfolio_Assets/Ecommerce_Operations/rozzy_store.png"
+                "path": os.path.join(assets_dir, "rozzy_store.png")
             }
         ]
 

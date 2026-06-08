@@ -3,10 +3,10 @@
 ## 1. Portfolio Selection (3–5 Examples)
 The following examples from your `Portfolio_Assets` demonstrate high-fidelity AI generation tailored for the supplement/wellness niche.
 
-- **[Oasis Hero Product](file:///d:/Projects/Upwork/Portfolio_Assets/hero_product_oasis_1773127367582.png)**: High-end product staging with soft, natural lighting.
-- **[Ingredient Splash](file:///d:/Projects/Upwork/Portfolio_Assets/ingredient_splash_oasis_1773127409320.png)**: Dynamic composition showing raw ingredients and powder splashes for sensory appeal.
-- **[Oasis Lifestyle Action](file:///d:/Projects/Upwork/Portfolio_Assets/lifestyle_action_oasis_1773127424749.png)**: Real-world product usage in an elevated lifestyle setting.
-- **[UGC AI Avatar](file:///d:/Projects/Upwork/Portfolio_Assets/ugc_avatar_oasis_1773127395284.png)**: "Scroll-stopping" human-centered creative using AI avatars.
+- **[Oasis Hero Product](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/hero_product_oasis_1773127367582.png)**: High-end product staging with soft, natural lighting.
+- **[Ingredient Splash](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/ingredient_splash_oasis_1773127409320.png)**: Dynamic composition showing raw ingredients and powder splashes for sensory appeal.
+- **[Oasis Lifestyle Action](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/lifestyle_action_oasis_1773127424749.png)**: Real-world product usage in an elevated lifestyle setting.
+- **[UGC AI Avatar](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/ugc_avatar_oasis_1773127395284.png)**: "Scroll-stopping" human-centered creative using AI avatars.
 
 ## 2. AI Workflow: The Google AI-Native Engine (30–50 Images/Day)
 

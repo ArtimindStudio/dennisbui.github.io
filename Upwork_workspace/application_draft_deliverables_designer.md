@@ -16,7 +16,7 @@ Hi there,
 
 I am high-energy about the opportunity to join you as a Deliverables Designer. I understand that a site audit or sales deck is not just a collection of slides; it is a visual narrative where every layout choice, color choice, and structured insight must build the prospect's confidence and make the "close" inevitable.
 
-As requested, I have attached a complete, live presentation example that I designed and packaged: **[MUD\WTR Mobile PDP UX & Conversion Audit](file:///d:/Projects/Upwork/mudwtr_mobile_pdp_audit.html)** (also attached as a print-ready PDF: **[mudwtr_mobile_pdp_audit.pdf](file:///d:/Projects/Upwork/mudwtr_mobile_pdp_audit.pdf)**).
+As requested, I have attached a complete, live presentation example that I designed and packaged: **[MUD\WTR Mobile PDP UX & Conversion Audit](file:////Users/dungbui/Antigravity/Upwork/mudwtr_mobile_pdp_audit.html)** (also attached as a print-ready PDF: **[mudwtr_mobile_pdp_audit.pdf](file:////Users/dungbui/Antigravity/Upwork/mudwtr_mobile_pdp_audit.pdf)**).
 
 **Here is the exact toolset and workflow I used to produce this deliverable:**
 
@@ -30,7 +30,7 @@ As requested, I have attached a complete, live presentation example that I desig
 * **Premium Design Aesthetic**: My layout designs are inspired by clean, modern brands (like Linear or Stripe)—utilizing generous negative space, crisp hairlines, and absolute grid alignment.
 * **Fast Turnaround**: Because of this AI-native workflow, I can take a raw client brief and deliver a polished, client-ready deck in under 2 hours.
 
-I also attached my wider portfolio case studies (**[Portfolio_AI_Specialist.md](file:///d:/Projects/Upwork/Portfolio_AI_Specialist.md)**) showing SaaS dashboards and DTC campaigns.
+I also attached my wider portfolio case studies (**[Portfolio_AI_Specialist.md](file:////Users/dungbui/Antigravity/Upwork/Portfolio_AI_Specialist.md)**) showing SaaS dashboards and DTC campaigns.
 
 I am fully aligned with your performance-based pay structure, async friendly, and ready to start immediately on June 1. I look forward to connecting in chat!
 

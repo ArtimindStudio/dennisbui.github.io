@@ -42,7 +42,7 @@ Propose rates that signal **Expertise** while remaining **Competitive**:
 
 ## 4. Application Material Synthesis
 ### Portfolio Curation
-- For **DTC/Ecommerce**: Use assets from `d:/Projects/Upwork/Portfolio_Assets/` focusing on "hero shots" and "lifestyle."
+- For **DTC/Ecommerce**: Use assets from `/Users/dungbui/Antigravity/Upwork/Portfolio_Assets/` focusing on "hero shots" and "lifestyle."
 - For **Health/Wellness**: Look for keywords like "Oasis", "ingredients", "splash", "natural."
 
 ### AI Workflow (Google AI-Native Engine)
@@ -53,10 +53,10 @@ Consistency in explaining the workflow is key to winning high-volume jobs (30–
 4. **Final Design**: **Canva** — Social marketing presets and final typography.
 
 ## 5. Key Files
-- `d:/Projects/Upwork/.env`: Contains Airtable credentials.
-- `d:/Projects/Upwork/ai_creative_stack.md`: Tool list for workflow explanation.
-- `d:/Projects/Upwork/Portfolio_Assets`: Location of all curated portfolio images.
-- `d:/Projects/Upwork/upwork_job_log.md`: (Optional) Local log of processed jobs.
+- `/Users/dungbui/Antigravity/Upwork/.env`: Contains Airtable credentials.
+- `/Users/dungbui/Antigravity/Upwork/ai_creative_stack.md`: Tool list for workflow explanation.
+- `/Users/dungbui/Antigravity/Upwork/Portfolio_Assets`: Location of all curated portfolio images.
+- `/Users/dungbui/Antigravity/Upwork/upwork_job_log.md`: (Optional) Local log of processed jobs.
 
 ## 6. Automation Scripts
-- `d:/Projects/Upwork/update_airtable_job.py`: Template for adding new records via the Airtable REST API.
+- `/Users/dungbui/Antigravity/Upwork/update_airtable_job.py`: Template for adding new records via the Airtable REST API.

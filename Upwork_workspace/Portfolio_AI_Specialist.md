@@ -8,20 +8,20 @@ This portfolio documents client case studies showcasing a hybrid approach: build
 ## Case Study 1: AI Video Automation Engine: NanoBanana & VEO3 Scaling System
 **Niche**: B2C Social Media Content & Ad Scaling
 **Role**: AI Automation Architect
-**Objective**: Build a multi-stage autonomous content engine that orchestrates the entire creative lifecycle, from trend analysis to multi-platform publishing.
+**Objective**: Build a multi-stage autonomous content engine that orchestrates the entire creative lifecycle. Built a custom creative studio tool using Google Flow Labs to turn raw video scripts into storyboards, generate AI art scenes with NanoBanana & VEO3, and compile the final animated video for multi-platform publishing.
 
 ### Workflow & System Architecture
-1.  **Intelligence Phase**: AI Agents scrape viral trend platforms, analyze topics, and generate high-engagement voiceover scripts.
-2.  **Visual Synthesis**: Integrates NanoBanana for ultra-realistic studio image assets and VEO3 for rendering high-fidelity, cinematic video clips.
+1.  **Intelligence & Storyboarding Phase**: Uses a custom studio tool built on Google Flow Labs to parse raw scripts and generate detailed visual storyboards automatically.
+2.  **Visual Synthesis**: Integrates NanoBanana Pro for style-guided scene generation and VEO3 for rendering high-fidelity, animated video clips from storyboard frames.
 3.  **Omni-Channel Distribution**: Automates scheduling and uploading via Blotato, pushing finished short-form video reels to Instagram, TikTok, and YouTube Shorts simultaneously.
 
-**Tools & Stack**: n8n, NanoBanana, VEO3 Video, Blotato publishing hooks.
+**Tools & Stack**: n8n, Google Flow Labs, NanoBanana, VEO3 Video, Blotato publishing hooks.
 
 ---
 
 ## Case Study 2: Magento 2 & Shopify Product Ingestion Workflow
 **Niche**: E-Commerce Catalog Automation
-**Objective**: Design a scraping and generative content pipeline to import raw supplier products, rewrite SEO-optimized details adhering to specific brand voice, and output 5 high-fidelity visual listings.
+**Objective**: Design a scraping and generative content pipeline for Dynamic Gift (https://www.dynamicgift.com.au/) to import raw supplier products, rewrite SEO-optimized details adhering to specific brand voice, and output 5 high-fidelity visual listings.
 
 ### Workflow & System Architecture
 1.  **Supplier Page Scraper**: Uses n8n HTTP requests and HTML parsers to scrape structured supplier specification grids (colors, dimensions, prices, images).

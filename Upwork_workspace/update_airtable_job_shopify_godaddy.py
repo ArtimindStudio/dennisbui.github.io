@@ -3,7 +3,7 @@ import requests
 import json
 
 # Minimalistic load_env logic
-def load_env(path='d:/Projects/Upwork/.env'):
+def load_env(path=os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')):
     env = {}
     if os.path.exists(path):
         with open(path) as f:

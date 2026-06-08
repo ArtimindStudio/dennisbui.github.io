@@ -1,8 +1,9 @@
+import os
 import re
 
 from collections import defaultdict
 
-with open("d:/Projects/Upwork/connects_raw.txt", "r", encoding="utf-8") as f:
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "connects_raw.txt"), "r", encoding="utf-8") as f:
     lines = f.readlines()
 
 jobs = defaultdict(int)

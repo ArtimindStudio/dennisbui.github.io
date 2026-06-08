@@ -37,7 +37,7 @@ For both workflows, I provide detailed **Standard Operating Handbooks (SOPs)** w
 3. Step-by-step troubleshooting protocols for your team to maintain, scale, and update the workflows autonomously.
 
 **Direct Experience:**
-I have built very similar architectures. In my attached portfolio (**[Portfolio_AI_Specialist.md](file:///d:/Projects/Upwork/Portfolio_AI_Specialist.md)**):
+I have built very similar architectures. In my attached portfolio (**[Portfolio_AI_Specialist.md](file:////Users/dungbui/Antigravity/Upwork/Portfolio_AI_Specialist.md)**):
 * **Case Study 4 (Systems Integration)**: Documents an autonomous n8n ingestion, classification, and CRM syncing pipeline that runs 100% in the background.
 * **Case Study 3 (SaaS Architecture)**: Showcases my layout standards for SaaS portals and structured dashboard visual grids.
 

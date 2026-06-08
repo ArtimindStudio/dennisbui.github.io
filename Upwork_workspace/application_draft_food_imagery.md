@@ -8,9 +8,9 @@
 ## 2. Portfolio Selection
 These examples demonstrate high-fidelity product rendering and layout consistency in the Food & Beverage space:
 
-- **[Oasis Hero Product](file:///d:/Projects/Upwork/Portfolio_Assets/hero_product_oasis_1773127367582.png)**: Demonstrates clean, template-style product staging.
-- **[Food & Beverage Splash](file:///d:/Projects/Upwork/Portfolio_Assets/ingredient_splash_oasis_1773127409320.png)**: Shows dynamic ingredient rendering for high-impact social/web graphics.
-- **[Oasis Lifestyle Staging](file:///d:/Projects/Upwork/Portfolio_Assets/lifestyle_action_oasis_1773127424749.png)**: High-quality integration of a product into a lifestyle background while maintaining consistent brand lighting.
+- **[Oasis Hero Product](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/hero_product_oasis_1773127367582.png)**: Demonstrates clean, template-style product staging.
+- **[Food & Beverage Splash](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/ingredient_splash_oasis_1773127409320.png)**: Shows dynamic ingredient rendering for high-impact social/web graphics.
+- **[Oasis Lifestyle Staging](file:////Users/dungbui/Antigravity/Upwork/Portfolio_Assets/lifestyle_action_oasis_1773127424749.png)**: High-quality integration of a product into a lifestyle background while maintaining consistent brand lighting.
 
 ## 3. AI Workflow: The Google AI-Native Engine
 

@@ -12,7 +12,7 @@ from email.mime.multipart import MIMEMultipart
 from playwright.async_api import async_playwright
 
 # Load .env file variables
-def load_env(path='d:/Projects/Upwork/.env'):
+def load_env(path=os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')):
     env = {}
     if os.path.exists(path):
         with open(path) as f:
@@ -522,7 +522,7 @@ async def run_pipeline(headless):
     # Run Playwright scrapers
     async with async_playwright() as p:
         # Launch persistent context
-        profile_path = "d:/Projects/Upwork/.chrome_profile"
+        profile_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".chrome_profile")
         print(f"Launching Playwright (headless={headless}, profile={profile_path})...")
         context = await p.chromium.launch_persistent_context(
             profile_path,

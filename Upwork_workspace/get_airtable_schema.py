@@ -12,7 +12,7 @@ def load_env(path='.env'):
                 env[key.strip()] = val.strip()
     return env
 
-env = load_env('d:/Projects/Upwork/.env')
+env = load_env(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
 AIRTABLE_PAT = env.get('AIRTABLE_PAT')
 AIRTABLE_BASE_ID = env.get('AIRTABLE_BASE_ID')
 AIRTABLE_TABLE_ID = env.get('AIRTABLE_TABLE_ID')

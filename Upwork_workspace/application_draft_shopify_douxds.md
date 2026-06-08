@@ -56,7 +56,7 @@ Best,
 
 
 ## 4. Portfolio Highlights to Attach
-- **MUD\WTR Mobile PDP UX Audit** ([mudwtr_mobile_pdp_audit.html](file:///d:/Projects/Upwork/mudwtr_mobile_pdp_audit.html)): Demonstrates deep understanding of DTC product page optimization, subscription UX, and conversion-focused design thinking — directly relevant to the DOUXDS PDP work.
+- **MUD\WTR Mobile PDP UX Audit** ([mudwtr_mobile_pdp_audit.html](file:////Users/dungbui/Antigravity/Upwork/mudwtr_mobile_pdp_audit.html)): Demonstrates deep understanding of DTC product page optimization, subscription UX, and conversion-focused design thinking — directly relevant to the DOUXDS PDP work.
 - **Vulcan Bites Brand Imagery**: Showcases AI-generated, studio-quality product photography that matches the premium aesthetic DOUXDS needs.
 - **Elite Minimalist Series**: Clean, modern design aesthetic that translates to Shopify store layouts.
 
