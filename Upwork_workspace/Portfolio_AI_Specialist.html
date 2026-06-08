@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bui Quang Dung (Dennis) — Senior AI Creative Specialist Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: rgba(30, 41, 59, 0.4);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --primary-color: #4f46e5; /* Indigo */
+      --secondary-color: #6366f1; /* Light Indigo */
+      --accent-color: #06b6d4; /* Cyan */
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 40px 20px;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    .portfolio-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header styling */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--primary-color) 70%, var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tagline {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .contact-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Case Studies */
+    .case-study {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: border-color 0.3s ease;
+    }
+
+    .case-study:hover {
+      border-color: rgba(99, 102, 241, 0.25);
+    }
+
+    .case-study-header {
+      margin-bottom: 30px;
+    }
+
+    .case-study-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .case-study-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 4px 12px;
+      border-radius: 12px;
+      color: white;
+    }
+
+    .case-study-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 900px;
+    }
+
+    /* Grid of images */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .image-card {
+      background-color: rgba(15, 23, 42, 0.6);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+
+    .image-card a {
+      text-decoration: none;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .image-placeholder {
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #0f172a;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .image-placeholder svg {
+      margin-bottom: 12px;
+      color: var(--primary-color);
+    }
+
+    .image-card-info {
+      padding: 15px;
+    }
+
+    .image-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .image-card-caption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Technical details block */
+    .tech-details {
+      background-color: rgba(15, 23, 42, 0.4);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 25px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tech-col {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .tech-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .tech-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .tech-list li {
+      margin-bottom: 6px;
+      padding-left: 15px;
+      position: relative;
+    }
+
+    .tech-list li::before {
+      content: "→";
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+    }
+
+    /* System Diagram / Flow styling */
+    .system-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      background-color: rgba(15, 23, 42, 0.5);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .step-num {
+      background-color: var(--primary-color);
+      color: white;
+      font-family: var(--font-heading);
+      font-weight: bold;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      margin-bottom: 3px;
+    }
+
+    .step-content p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .case-study {
+        padding: 20px;
+      }
+      .brand-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portfolio-container">
+    
+    <header>
+      <h1 class="brand-title">Bui Quang Dung</h1>
+      <p class="brand-tagline">Senior AI Creative Specialist</p>
+      
+      <div class="contact-links">
+        <a href="mailto:hello.artimind@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello.artimind@gmail.com
+        </a>
+        <a href="https://aiartimind.com" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          aiartimind.com
+        </a>
+      </div>
+    </header>
+
+    <!-- Case Study 1 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          AI Video Automation Engine: NanoBanana & VEO3 Scaling System
+          <span class="case-study-tag">AI Automation Architect</span>
+        </h2>
+        <p class="case-study-desc">
+          Engineered a multi-stage autonomous content engine that orchestrates the entire creative lifecycle, from trend analysis to multi-platform publishing.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <!-- User upload visual assets under Portfolio_Assets/Video_Automation_Engine/ -->
+          <img src="Portfolio_Assets/Video_Automation_Engine/creative_workflow.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Creative Workflow">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: creative_workflow.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Orchestrated Scripting Flow</h3>
+            <p class="image-card-caption">Detailed trend parsing interface automatically generating ad blueprints.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="Portfolio_Assets/Video_Automation_Engine/visual_synthesis.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Visual Synthesis">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: visual_synthesis.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">VEO3 & NanoBanana Outputs</h3>
+            <p class="image-card-caption">4K background renders stitched with high-definition motion video.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-flow">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Intelligence Phase</h4>
+            <p>AI Agents scrape viral trend platforms, analyze topics, and generate high-engagement voiceover scripts.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Visual Synthesis</h4>
+            <p>Integrates NanoBanana for ultra-realistic studio image assets and VEO3 for rendering high-fidelity, cinematic video clips.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Omni-Channel Distribution</h4>
+            <p>Automates scheduling and uploading via Blotato, pushing finished short-form video reels to Instagram, TikTok, and YouTube Shorts simultaneously.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Technology Stack</h3>
+          <ul class="tech-list">
+            <li><strong>Orchestrator</strong>: n8n workflow agent engine</li>
+            <li><strong>Asset Generators</strong>: NanoBanana & VEO3 video synthesis</li>
+            <li><strong>Scheduler/API</strong>: Blotato publishing hooks</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 2 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          Magento 2 & Shopify Product Ingestion Workflow
+          <span class="case-study-tag">E-Commerce & AI Content</span>
+        </h2>
+        <p class="case-study-desc">
+          Designed a scraping and generative content pipeline to import raw supplier products, rewrite SEO-optimized details adhering to specific brand voice, and output 5 high-fidelity visual listings.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <img src="Portfolio_Assets/Magento_Shopify_Workflow/scraper_structure.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Scraper Structure">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: scraper_structure.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Supplier Scraper Flow</h3>
+            <p class="image-card-caption">Pulls product pricing variables, specs, and stock quantities instantly.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="Portfolio_Assets/Magento_Shopify_Workflow/ingestion_dashboard.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Ingestion Dashboard">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: ingestion_dashboard.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Magento 2 REST Syncing</h3>
+            <p class="image-card-caption">Backend dashboard showing successful data uploads and visual listings.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-flow">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Supplier Page Scraper</h4>
+            <p>Uses n8n HTTP requests and HTML parsers to scrape structured supplier specification grids (colors, dimensions, prices, images).</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Brand-Voice Copy Generator</h4>
+            <p>Passes specifications to LLM nodes pre-trained on strict brand style guides to generate product descriptions and marketing copy.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Studio-Grade Visual Synthesis</h4>
+            <p>Google Nano Banana 2 renders 5 distinct lifestyle and studio background stages for the product canvas with identical lighting coordinates.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Automated Store Publishing</h4>
+            <p>Uploads descriptions, metadata, pricing variant sheets, and images directly to Magento 2 and Shopify store databases via REST APIs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Tools & Frameworks</h3>
+          <ul class="tech-list">
+            <li><strong>Scraper & Pipeline</strong>: n8n & custom Python scripts</li>
+            <li><strong>Visual Editor</strong>: Adobe Photoshop / Illustrator (final touching & layout scaling)</li>
+            <li><strong>Staging Design</strong>: Figma & Google Nano Banana 2</li>
+            <li><strong>Store APIs</strong>: Magento 2 / Shopify Admin REST APIs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 3 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          aiartimind.com — AI Generative Knowledge Platform (2024 - 2025)
+          <span class="case-study-tag">AI Knowledge Platform</span>
+        </h2>
+        <p class="case-study-desc">
+          Designed, developed, and scaled a knowledge-sharing ecosystem dedicated to generative AI artists, prompt engineering, and automated workflow tutorials.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <img src="Portfolio_Assets/AI_Knowledge_Platform/platform_home.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Platform Home">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: platform_home.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Interactive Knowledge Grid</h3>
+            <p class="image-card-caption">User interface featuring structured pathways for prompt engineering and tools tutorials.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="Portfolio_Assets/AI_Knowledge_Platform/platform_analytics.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Platform Analytics">
+          <div class="image-placeholder" style="display:none;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>[ Upload: platform_analytics.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Performance Optimization</h3>
+            <p class="image-card-caption">Lighthouse reports showing top speed ratings for high monthly organic traffic.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Stack Details</h3>
+          <ul class="tech-list">
+            <li><strong>Frontend</strong>: WordPress & optimized Custom Themes</li>
+            <li><strong>Design Engine</strong>: Figma vector layouts and Midjourney graphics</li>
+            <li><strong>SEO Strategy</strong>: Structured semantic layout & optimized load times</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 4 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          LUMINA — Luxury Chronographs & Fine Gem Staging
+          <span class="case-study-tag">Luxury Accessories</span>
+        </h2>
+        <p class="case-study-desc">
+          Generated hyper-realistic luxury studio environments for high-end watches, rendering volcanic stones, wet surfaces, and complex refraction.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <img src="Portfolio_Assets/Luxury_Accessories/volcanic_watch.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Volcanic Watch Staging">
+          <div class="image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>[ Upload: volcanic_watch.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Chronograph Rim Staging</h3>
+            <p class="image-card-caption">Precise side-lighting catching the watch face glass and metallic reflections.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="Portfolio_Assets/Luxury_Accessories/emerald_ring.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Emerald Ring Splash">
+          <div class="image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>[ Upload: emerald_ring.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Macro Gem Refraction</h3>
+            <p class="image-card-caption">Raw emerald ring resting on wet marble with micro-water droplets.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Tools Used</h3>
+          <ul class="tech-list">
+            <li><strong>AI Rendering</strong>: Google Nano Banana 2 (4K raw render output)</li>
+            <li><strong>Reflection Mapping</strong>: Google Omni constraint mapping</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 5 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          AURA — Organic Skincare & Wellness DTC Campaign
+          <span class="case-study-tag">DTC Wellness</span>
+        </h2>
+        <p class="case-study-desc">
+          Created a natural, trustworthy launching kit for an organic skincare brand, featuring clean spa backdrops, window reflections, and water drops.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <img src="Portfolio_Assets/Organic_Skincare/skincare_splash.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Skincare Water Splash">
+          <div class="image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>[ Upload: skincare_splash.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Splash Canister Setup</h3>
+            <p class="image-card-caption">Skincare bottle resting on wet white marble with fresh citrus splash details.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="Portfolio_Assets/Organic_Skincare/spa_shadows.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Spa Blind Shadows">
+          <div class="image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+            <span>[ Upload: spa_shadows.png ]</span>
+          </div>
+          <div class="image-card-info">
+            <h3 class="image-card-title">Zen Bathroom Shadow Staging</h3>
+            <p class="image-card-caption">Natural morning sun casting soft window blind shadows across the products.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Tools & Aesthetics</h3>
+          <ul class="tech-list">
+            <li><strong>AI Staging</strong>: Google Omni themed adaptation</li>
+            <li><strong>Post-Production</strong>: Canva (minimal typography overlays)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study 6 -->
+    <section class="case-study">
+      <div class="case-study-header">
+        <h2 class="case-study-title">
+          E-Commerce Operations & Shopify Store Design (2019 - 2022)
+          <span class="case-study-tag">E-Commerce Operations</span>
+        </h2>
+        <p class="case-study-desc">
+          Building and optimizing custom Shopify stores with simple but clean, modern layouts and high-converting graphic banners.
+        </p>
+      </div>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <a href="https://st-unique.myshopify.com/" target="_blank">
+            <img src="Portfolio_Assets/Ecommerce_Operations/uma_store.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Uma Shopify Store">
+            <div class="image-placeholder">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>[ Upload: uma_store.png ]</span>
+            </div>
+          </a>
+          <div class="image-card-info">
+            <h3 class="image-card-title"><a href="https://st-unique.myshopify.com/" target="_blank" style="color:white; text-decoration:none;">Uma — Minimal Shopify Store</a></h3>
+            <p class="image-card-caption">Clean and creative layouts with modern design focusing on product grids and header banners.</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <a href="https://rozzy-store-demo.myshopify.com/" target="_blank">
+            <img src="Portfolio_Assets/Ecommerce_Operations/rozzy_store.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Rozzy Shopify Store">
+            <div class="image-placeholder">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>[ Upload: rozzy_store.png ]</span>
+            </div>
+          </a>
+          <div class="image-card-info">
+            <h3 class="image-card-title"><a href="https://rozzy-store-demo.myshopify.com/" target="_blank" style="color:white; text-decoration:none;">Rozzy — Multipurpose Store</a></h3>
+            <p class="image-card-caption">Multipurpose Shopify template customizations, catalog indexing, and speed enhancements.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-col">
+          <h3 class="tech-title">Operations Stack</h3>
+          <ul class="tech-list">
+            <li><strong>Store Setup</strong>: Shopify Custom Theme Editor</li>
+            <li><strong>Design Core</strong>: Clean CSS margins, responsive mobile layouts, and bright imagery</li>
+            <li><strong>Goal</strong>: Building Shopify stores that highlight banners, navigation, and conversion points</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bui Quang Dung (Dennis) — Senior AI Creative Specialist</title>
+  <!-- Modern Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Premium CSS Variables */
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --primary-color: #4f46e5; /* Indigo */
+      --secondary-color: #6366f1; /* Light Indigo */
+      --text-dark: #0f172a; /* Slate 900 */
+      --text-muted: #475569; /* Slate 600 */
+      --border-color: #e2e8f0;
+      --accent-color: #06b6d4; /* Cyan */
+      --font-heading: 'Outfit', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .cv-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .profile-section {
+      text-align: center;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 25px;
+    }
+
+    .profile-name {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .profile-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar-section-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #94a3b8;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #cbd5e1;
+    }
+
+    .contact-list a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-list a:hover {
+      color: var(--accent-color);
+    }
+
+    .skills-group {
+      margin-bottom: 15px;
+    }
+
+    .skills-group-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background-color: #1e293b;
+      color: #cbd5e1;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      padding: 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .summary-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .experience-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+
+    .experience-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .job-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .job-company {
+      color: var(--primary-color);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .job-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      background-color: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .job-bullets {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .job-bullets li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .job-bullets li::before {
+      content: "•";
+      color: var(--primary-color);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .cv-container {
+        box-shadow: none;
+        border: none;
+        grid-template-columns: 240px 1fr;
+        max-width: 100%;
+      }
+      .sidebar {
+        background-color: #0f172a;
+        color: #f8fafc;
+        padding: 20px;
+        border-right: 1px solid #cbd5e1;
+      }
+      .profile-name {
+        -webkit-text-fill-color: initial;
+        color: #ffffff;
+      }
+      .tag {
+        background-color: #1e293b;
+        color: #cbd5e1;
+        border-color: #334155;
+      }
+      .main-content {
+        padding: 20px;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .cv-container {
+        grid-template-columns: 1fr;
+      }
+      body {
+        padding: 10px;
+      }
+      .sidebar {
+        padding: 30px 20px;
+      }
+      .main-content {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cv-container">
+    
+    <!-- Sidebar / Left Panel -->
+    <aside class="sidebar">
+      <div class="profile-section">
+        <h1 class="profile-name">Bui Quang Dung</h1>
+        <div class="profile-title">Senior AI Creative Specialist</div>
+      </div>
+      
+      <div>
+        <h2 class="sidebar-section-title">Contact</h2>
+        <ul class="contact-list">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:hello.artimind@gmail.com">hello.artimind@gmail.com</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <a href="https://aiartimind.com" target="_blank">aiartimind.com</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Hanoi, Vietnam / Remote</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div>
+        <h2 class="sidebar-section-title">Skills & Stack</h2>
+        
+        <div class="skills-group">
+          <h3 class="skills-group-title">AI Staging & Video</h3>
+          <div class="tags-container">
+            <span class="tag">Google Omni</span>
+            <span class="tag">Nano Banana 2</span>
+            <span class="tag">VEO3 Video</span>
+            <span class="tag">Midjourney</span>
+            <span class="tag">Flux.1</span>
+            <span class="tag">ChatGPT</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3 class="skills-group-title">Design & Front-End</h3>
+          <div class="tags-container">
+            <span class="tag">Photoshop</span>
+            <span class="tag">Illustrator</span>
+            <span class="tag">Figma</span>
+            <span class="tag">UI/UX Design</span>
+            <span class="tag">WordPress</span>
+            <span class="tag">Shopify Theme</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <h3 class="skills-group-title">E-Commerce & Ops</h3>
+          <div class="tags-container">
+            <span class="tag">Shopify Admin</span>
+            <span class="tag">n8n Workflows</span>
+            <span class="tag">Python</span>
+            <span class="tag">Airtable</span>
+            <span class="tag">Sourcing</span>
+            <span class="tag">Procurement</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content / Right Panel -->
+    <main class="main-content">
+      
+      <!-- Summary Section -->
+      <section>
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary-text">
+          AI generative artist and technology enthusiast with a strong foundation in Python and over five years of experience in website design. Highly skilled in building AI-assisted workflows for automated content creation, e-commerce operations, and sourcing. Experienced in scaling digital assets while ensuring strict brand-voice guidelines and graphic design styling. Fluent in both Vietnamese (native) and English.
+        </p>
+      </section>
+
+      <!-- Work Experience -->
+      <section>
+        <h2 class="section-title">Professional Experience</h2>
+        
+        <div class="experience-item">
+          <div class="job-header">
+            <span class="job-title">AI Generative Artist / Founder</span>
+            <span class="job-date">2022-01 – Present</span>
+          </div>
+          <div class="job-company">ArtiMind Studio (aiartimind.com)</div>
+          <ul class="job-bullets">
+            <li>Created high-fidelity AI-generated visual content using MidJourney, Flux, and proprietary Google AI tools.</li>
+            <li>Developed AI-assisted automated workflows for content creation, connecting asset builders (NanoBanana/VEO3) to social channels.</li>
+            <li>Managed and grew the digital platform <strong>aiartimind.com</strong> for AI generative knowledge sharing and tutorials.</li>
+            <li>Collaborated with design teams to implement brand templates, leveraging Figma for landing pages and Photoshop for precision asset editing.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <div class="job-header">
+            <span class="job-title">Self-Business Owner</span>
+            <span class="job-date">2019-01 – 2022-01</span>
+          </div>
+          <div class="job-company">E-commerce & Dropshipping</div>
+          <ul class="job-bullets">
+            <li>Built and managed successful dropshipping businesses, handling supplier sourcing, international logistics, and ad operations.</li>
+            <li>Designed, customized, and optimized Shopify and WordPress e-commerce websites to maximize conversion rates and user experience.</li>
+            <li>Developed graphic banner creatives and copy guidelines matching precise branding voices.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <div class="job-header">
+            <span class="job-title">Sourcing & Procurement Specialist</span>
+            <span class="job-date">2014-01 – 2018-01</span>
+          </div>
+          <div class="job-company">Samsung Electronics Vietnam</div>
+          <ul class="job-bullets">
+            <li>Managed complex supplier relationships and procurement strategies to optimize manufacturing costs and material supply lines.</li>
+            <li>Negotiated procurement contracts, ensuring absolute supply chain reliability and sustainability for high-volume consumer electronics.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section>
+        <h2 class="section-title">Education</h2>
+        <div class="experience-item">
+          <div class="job-header">
+            <span class="job-title">M.D.: Business Administration</span>
+            <span class="job-date">2009-01 – 2013-01</span>
+          </div>
+          <div class="job-company">Foreign Trade University - Hanoi, HN</div>
+        </div>
+      </section>
+
+      <!-- Additional Interests -->
+      <section>
+        <h2 class="section-title">Additional Information & Interests</h2>
+        <ul class="job-bullets">
+          <li><strong>Manga & Anime Knowledge:</strong> Passionate manga/anime lover with a rich understanding of narrative arcs, visual styles, and character aesthetics.</li>
+          <li><strong>Languages:</strong> Bilingual communication in Vietnamese (Native) & English (Fluent).</li>
+          <li><strong>Availability:</strong> Remote AI training & creative projects with flexible hours.</li>
+        </ul>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Ignore environment variables containing keys/tokens
+.env
+*.env
+.env*
+credentials*
+*.key
+*.token
+*secret*
+
+# Ignore large media binaries that are not needed for web rendering
+*.pdf
+*.zip
+*.tar.gz
+*.mp4
+*.mov
+BigBrandAds.pdf
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

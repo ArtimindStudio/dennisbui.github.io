@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUD\WTR Mobile PDP UX & Conversion Audit</title>
+    <!-- Google Fonts: Lora for headings, Raleway for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for funnel visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        /* Design Tokens & Theme Variables (Organic Biophilic Dark Mode) */
+        :root {
+            --color-bg: #1a1a17;           /* Warm organic charcoal-mud */
+            --color-surface: #262622;      /* Elevated surface dark */
+            --color-surface-hover: #33332e;/* Card hover surface */
+            --color-text-primary: #f4f3ee; /* Soft warm off-white */
+            --color-text-muted: #a19f96;   /* Earthy muted grey */
+            --color-accent-orange: #e26a36;/* Spiced energy orange */
+            --color-accent-green: #52796f; /* Earthy forest green */
+            --color-border: #383833;       /* Subtle warm border hairline */
+            --color-border-glow: #e26a364d;/* Orange glow */
+            --font-heading: 'Lora', serif;
+            --font-body: 'Raleway', sans-serif;
+            --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+            --shadow-glow: 0 0 16px rgba(226, 106, 54, 0.15);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 16:9 Aspect Ratio Container for Presentation */
+        .slide-deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-bg);
+        }
+
+        @media (min-width: 1025px) {
+            .slide-deck {
+                width: 100vw;
+                height: 100vh;
+                max-width: calc(100vh * 16 / 9);
+                max-height: calc(100vw * 9 / 16);
+                margin: auto;
+                position: absolute;
+                inset: 0;
+                border: 1px solid var(--color-border);
+                box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+                border-radius: 12px;
+            }
+        }
+
+        /* Slide Styles */
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            padding: 4% 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        visibility 0.5s;
+            transform: translateY(20px);
+            background-color: var(--color-bg);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+        }
+
+        .slide-header {
+            margin-bottom: 24px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 12px;
+        }
+
+        .slide-title-group h2 {
+            font-size: clamp(24px, 3.5vh, 36px);
+            color: var(--color-text-primary);
+        }
+
+        .slide-title-group p {
+            font-size: clamp(12px, 1.8vh, 16px);
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        .eyebrow {
+            font-family: var(--font-body);
+            font-size: clamp(10px, 1.5vh, 13px);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-accent-orange);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        /* Slide 1: Cover Layout */
+        .slide-cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #2e2e26 0%, var(--color-bg) 70%);
+        }
+
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 800px;
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .cover-logo {
+            font-family: var(--font-heading);
+            font-size: clamp(14px, 2.5vh, 22px);
+            letter-spacing: 4px;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 8px 24px;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.02);
+            text-transform: uppercase;
+        }
+
+        .cover-title {
+            font-size: clamp(36px, 6vh, 64px);
+            line-height: 1.15;
+            color: var(--color-text-primary);
+        }
+
+        .cover-title span {
+            color: var(--color-accent-orange);
+            font-style: italic;
+        }
+
+        .cover-subtitle {
+            font-size: clamp(16px, 2.5vh, 22px);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .cover-cta {
+            margin-top: 20px;
+            padding: 12px 32px;
+            border: 1px solid var(--color-accent-orange);
+            background-color: transparent;
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cover-cta:hover {
+            background-color: var(--color-accent-orange);
+            color: var(--color-bg);
+            box-shadow: 0 0 24px rgba(226, 106, 54, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Grid Layouts for Content Slides */
+        .content-grid-2 {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+            height: calc(100% - 90px);
+            overflow: hidden;
+        }
+
+        .content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .content-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(38, 38, 34, 0.4);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(226, 106, 54, 0.3);
+        }
+
+        .glass-card.highlighted {
+            border: 1px solid var(--color-accent-orange);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .glass-card h3 {
+            font-size: clamp(18px, 2.5vh, 24px);
+            color: var(--color-accent-orange);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .glass-card p {
+            font-size: clamp(13px, 1.8vh, 15px);
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .metrics-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .metric-number {
+            font-family: var(--font-heading);
+            font-size: clamp(32px, 5vh, 48px);
+            color: var(--color-accent-orange);
+            font-weight: bold;
+            min-width: 100px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric-details h4 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .metric-details p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        /* Slide 3: Interactive Mobile Phone Mockup */
+        .phone-container {
+            position: relative;
+            width: 270px;
+            height: 520px;
+            background: #111;
+            border: 10px solid #2e2e2a;
+            border-radius: 36px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #161614;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 12px;
+            font-family: sans-serif; /* Mimic actual system-ui fonts */
+            color: #fff;
+            scrollbar-width: none; /* Hide scrollbar for clean presentation */
+        }
+        .phone-screen::-webkit-scrollbar { display: none; }
+
+        /* Mockup Header */
+        .mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a24;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .mock-logo { font-size: 11px; letter-spacing: 2px; font-weight: bold; }
+        .mock-menu { font-size: 12px; }
+
+        /* Mockup Content - Current Mobile PDP */
+        .mock-pdp-current {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .mock-img {
+            width: 100%;
+            height: 140px;
+            background-color: #262622;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 11px;
+            color: #777;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(135deg, #2a2a25 0%, #1a1a17 100%);
+        }
+        .mock-img::after {
+            content: "MUD\WTR Blend";
+            font-size: 12px;
+            color: #a19f96;
+            font-family: serif;
+        }
+
+        .mock-title { font-size: 16px; font-family: serif; margin-top: 4px; }
+        .mock-subtitle { font-size: 11px; color: #aaa; margin-top: -6px; }
+
+        .mock-reviews {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            font-size: 9px;
+            color: #e26a36;
+        }
+        .mock-reviews span { color: #888; margin-left: 4px; }
+
+        /* Friction Highlighting Overlays */
+        .friction-overlay {
+            position: absolute;
+            border: 2px dashed #ff4a4a;
+            border-radius: 6px;
+            background-color: rgba(255, 74, 74, 0.15);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .friction-overlay.active {
+            opacity: 1;
+            animation: pulseFriction 1.5s infinite;
+        }
+
+        @keyframes pulseFriction {
+            0% { box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 74, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 74, 74, 0); }
+        }
+
+        /* Mockup pricing cards block (Current) */
+        .mock-pricing-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 8px;
+            background-color: #1e1e1a;
+            position: relative;
+        }
+        .mock-price-option {
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+        }
+        .mock-price-option.selected {
+            border-color: #52796f;
+            background-color: rgba(82, 121, 111, 0.1);
+        }
+
+        .mock-btn-cta {
+            width: 100%;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        /* Mockup Content - Redesigned Mobile PDP */
+        .mock-pdp-redesigned {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
+        }
+
+        /* Unified toggle */
+        .mock-toggle-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid #333;
+            border-radius: 9999px;
+            padding: 3px;
+            background-color: #1c1c18;
+        }
+        .mock-toggle-btn {
+            padding: 6px;
+            border-radius: 9999px;
+            text-align: center;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .mock-toggle-btn.active {
+            background-color: #52796f;
+            color: #fff;
+        }
+
+        /* Flavor sensory bar */
+        .mock-flavor-container {
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 8px;
+            background-color: #1a1a17;
+            font-size: 9px;
+        }
+        .mock-flavor-bar {
+            height: 4px;
+            background: linear-gradient(to right, #4a3319, #e26a36);
+            border-radius: 2px;
+            margin: 6px 0;
+            position: relative;
+        }
+        .mock-flavor-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: -3px;
+            left: 70%;
+        }
+
+        /* Sticky bottom CTA */
+        .mock-sticky-cta {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(30, 30, 26, 0.95);
+            border-top: 1px solid #333;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+        .mock-sticky-price {
+            display: flex;
+            flex-direction: column;
+        }
+        .mock-sticky-price .price { font-size: 12px; font-weight: bold; color: #fff; }
+        .mock-sticky-price .desc { font-size: 8px; color: #888; }
+        .mock-sticky-btn {
+            background-color: #e26a36;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Interactive Sidebar Selection Controls */
+        .interactive-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .control-tab {
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            padding-left: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .control-tab.active {
+            border-left-color: var(--color-accent-orange);
+            background-color: rgba(226, 106, 54, 0.03);
+        }
+
+        .control-tab h4 {
+            font-size: 16px;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .control-tab p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
+
+        .control-tab.active h4 {
+            color: var(--color-accent-orange);
+        }
+
+        /* Slide 4: Current vs Redesign Switcher Layout */
+        .switcher-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 4px;
+            border-radius: 9999px;
+            border: 1px solid var(--color-border);
+            width: fit-content;
+        }
+
+        .switcher-btn {
+            padding: 8px 24px;
+            border-radius: 9999px;
+            border: none;
+            background-color: transparent;
+            color: var(--color-text-muted);
+            font-family: var(--font-body);
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .switcher-btn.active {
+            background-color: var(--color-accent-green);
+            color: var(--color-text-primary);
+        }
+
+        .comparison-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+            height: calc(100% - 150px);
+        }
+
+        .design-annotation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .annotation-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .annotation-num {
+            background-color: var(--color-accent-orange);
+            color: var(--color-bg);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .annotation-item.green-num .annotation-num {
+            background-color: var(--color-accent-green);
+        }
+
+        .annotation-text h4 {
+            font-size: 15px;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .annotation-text p {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
+
+        /* Slide 5: Matrix Grid */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            height: calc(100% - 90px);
+            padding: 10px 0;
+        }
+
+        .matrix-quadrant {
+            background: rgba(38, 38, 34, 0.3);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .matrix-label {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .matrix-quadrant h3 {
+            font-size: clamp(15px, 2.2vh, 18px);
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .matrix-quadrant.orange-accent h3 { color: var(--color-accent-orange); }
+        .matrix-quadrant.green-accent h3 { color: var(--color-accent-green); }
+
+        .matrix-list-items {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .matrix-list-items li {
+            font-size: clamp(12px, 1.6vh, 14px);
+            color: var(--color-text-muted);
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .matrix-list-items li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-orange);
+            font-weight: bold;
+        }
+
+        .matrix-quadrant.green-accent .matrix-list-items li::before {
+            color: var(--color-accent-green);
+        }
+
+        /* Deck Navigation Controls */
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--color-accent-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 1000;
+            background: rgba(30, 30, 26, 0.85);
+            padding: 8px 24px;
+            border-radius: 9999px;
+            border: 1px solid var(--color-border);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--color-text-primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-accent-orange);
+        }
+
+        .slide-counter {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .chart-box {
+            width: 100%;
+            height: 100%;
+            max-height: 360px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Animations */
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Mobile adaptation overrides */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 24px 16px;
+                overflow-y: auto;
+            }
+            .content-grid-2, .comparison-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                overflow-y: auto;
+                height: auto;
+            }
+            .content-right {
+                order: -1; /* Place visual elements first on mobile screens */
+                min-height: 300px;
+            }
+            .matrix-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                height: auto;
+            }
+            .nav-controls {
+                bottom: 12px;
+            }
+        }
+
+        /* Print Media Styles to force sequential slide generation in PDF */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            body {
+                background-color: var(--color-bg) !important;
+                overflow: visible !important;
+                height: auto !important;
+            }
+            .slide-deck {
+                position: static !important;
+                width: 100% !important;
+                height: auto !important;
+                max-width: none !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            .slide {
+                position: relative !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                display: flex !important;
+                padding: 4% 6% !important;
+            }
+            .nav-controls, .progress-bar-container {
+                display: none !important;
+            }
+            @page {
+                margin: 0;
+                size: landscape;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Slide Deck Container (16:9 box centered on desktop) -->
+    <div class="slide-deck">
+
+        <!-- Slide 1: Cover Page -->
+        <div class="slide active slide-cover" id="slide1">
+            <div class="cover-content">
+                <div class="cover-logo">MUD\WTR UX AUDIT</div>
+                <h1 class="cover-title">Optimizing the <span>Mobile Subscription Hook</span></h1>
+                <p class="cover-subtitle">A high-conversion UX breakdown and interface wireframe proposal for MUD\WTR's mobile landing pages.</p>
+                <button class="cover-cta" onclick="nextSlide()">Begin Audit Review</button>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Core Problem (Data Funnel) -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <span class="eyebrow">HEURISTIC TEARDOWN</span>
+                    <h2>The Conversion Leak</h2>
+                    <p>Where users drop off in the mobile acquisition funnel.</p>
+                </div>
+                <div class="slide-counter-header">02 / 05</div>
+            </div>
+            
+            <div class="content-grid-2">
+                <div class="content-left">
+                    <div class="glass-card highlighted">
+                        <h3>The PDP Drop-Off</h3>
+                        <p>Our audit identified that **PDP to Add-To-Cart (ATC)** represents the single largest conversion drop-off point, leaking **93% of prospective mobile users**. While traffic stays high on the home screen, the friction on the product screen halts the buying momentum.</p>
+                    </div>
+                    <div class="metrics-list">
+                        <div class="metric-item">
+                            <div class="metric-number">93.0%</div>
+                            <div class="metric-details">
+                                <h4>Acquisition Leak</h4>
+                                <p>PDP visitors who leave without clicking the Call-To-Action (CTA).</p>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-number">+18.5%</div>
+                            <div class="metric-details">
+                                <h4>Estimated Lift Opportunity</h4>
+                                <p>Projected conversion increase by resolving above-the-fold interface friction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="chart-box glass-card" style="width: 100%; height: 320px;">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Friction Map (Interactive) -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <span class="eyebrow">ACQUISITION CRITIQUE</span>
+                    <h2>The Mobile Friction Map</h2>
+                    <p>Click the cards on the left to highlight core Above-the-Fold UX bottlenecks.</p>
+                </div>
+                <div class="slide-counter-header">03 / 05</div>
+            </div>
+
+            <div class="content-grid-2">
+                <!-- Left: Interactive Cards -->
+                <div class="content-left">
+                    <div class="interactive-controls">
+                        <div class="control-tab active" onclick="activateFriction(1, 'current')">
+                            <h4>1. Subscription vs. One-Time Choice Paralyis</h4>
+                            <p>Current layout displays two massive, structurally identical price boxes. This forces cognitive choice before value is fully established.</p>
+                        </div>
+                        <div class="control-tab" onclick="activateFriction(2, 'current')">
+                            <h4>2. Lack of Sensory & Taste Trust</h4>
+                            <p>Mushrooms can be intimidating to drink. Current product images focus on the canister instead of describing taste, texture, and ritual.</p>
+                        </div>
+                        <div class="control-tab" onclick="activateFriction(3, 'current')">
+                            <h4>3. Detached CTA & Missing Trust Anchors</h4>
+                            <p>On mobile, the "Add to Cart" button is easily pushed below the viewport. Key purchase triggers (Free Shipping, guarantee) are too low.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Mobile Screen Mockup -->
+                <div class="content-right">
+                    <div class="phone-container">
+                        <div class="phone-screen">
+                            <div class="mock-header">
+                                <span class="mock-logo">MUD\WTR</span>
+                                <span class="mock-menu">☰</span>
+                            </div>
+                            
+                            <div class="mock-pdp-current">
+                                <div class="mock-img">
+                                    <!-- Flavor overlay (Friction 2) -->
+                                    <div class="friction-overlay" id="f-overlay-2" style="inset: 5px;">
+                                        <span style="background:#ff4a4a; color:#fff; font-size:8px; padding:2px 6px; border-radius:4px; font-family:sans-serif;">Missing Taste Profile</span>
+                                    </div>
+                                </div>
+                                <div class="mock-title">Rise Cacao Blend</div>
+                                <div class="mock-reviews">★★★★★ <span>14,203 reviews</span></div>
+                                <div class="mock-subtitle">Organic Mushroom Coffee Alternative</div>
+                                
+                                <!-- Pricing cards block (Friction 1) -->
+                                <div class="mock-pricing-block">
+                                    <div class="friction-overlay active" id="f-overlay-1" style="inset: -4px;">
+                                        <span style="background:#ff4a4a; color:#fff; font-size:8px; padding:2px 6px; border-radius:4px; font-family:sans-serif; z-index:10;">Choice Paralysis</span>
+                                    </div>
+                                    <div class="mock-price-option selected">
+                                        <div>
+                                            <strong>Subscribe & Save</strong><br>
+                                            <span>Starter Kit: 30 servings + Mug + Frother</span>
+                                        </div>
+                                        <div><strong>$40/mo</strong></div>
+                                    </div>
+                                    <div class="mock-price-option">
+                                        <div>
+                                            <strong>One-Time Purchase</strong><br>
+                                            <span>Canister only (30 servings)</span>
+                                        </div>
+                                        <div><strong>$60</strong></div>
+                                    </div>
+                                </div>
+
+                                <!-- CTA Block (Friction 3) -->
+                                <div style="position: relative;">
+                                    <div class="friction-overlay" id="f-overlay-3" style="inset: -5px;">
+                                        <span style="background:#ff4a4a; color:#fff; font-size:8px; padding:2px 6px; border-radius:4px; font-family:sans-serif;">Pushed Below Fold</span>
+                                    </div>
+                                    <button class="mock-btn-cta">Add to Cart</button>
+                                </div>
+                                
+                                <p style="font-size: 8px; color: #666; text-align: center; margin-top: 10px;">Free shipping over $50 • 30-Day Money Back Guarantee</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Proposed Redesign (Current vs Redesign layout) -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <span class="eyebrow">INTERFACE REDESIGN</span>
+                    <h2>Proposed Wireframe Solution</h2>
+                    <p>Toggle below to compare the current layout with our proposed, high-conversion design.</p>
+                </div>
+                <div class="slide-counter-header">04 / 05</div>
+            </div>
+
+            <div class="comparison-layout">
+                <!-- Left: Explanations -->
+                <div class="content-left">
+                    <div class="switcher-header">
+                        <button class="switcher-btn" id="btn-show-current" onclick="toggleProposedLayout(false)">Current Layout</button>
+                        <button class="switcher-btn active" id="btn-show-proposed" onclick="toggleProposedLayout(true)">Proposed Redesign</button>
+                    </div>
+
+                    <div class="design-annotation-list" id="annotation-proposed">
+                        <div class="annotation-item green-num">
+                            <div class="annotation-num">1</div>
+                            <div class="annotation-text">
+                                <h4>Unified Subscription Toggle</h4>
+                                <p>Replaced the bulky double price blocks with a clean switcher toggle. Default is preset to "Subscribe & Save" showing clear $20 monthly savings.</p>
+                            </div>
+                        </div>
+                        <div class="annotation-item green-num">
+                            <div class="annotation-num">2</div>
+                            <div class="annotation-text">
+                                <h4>Sensory Flavor Profile Bar</h4>
+                                <p>Added a visual taste/sensory meter (e.g., Cacao base, Earthy/Spiced notes, 1/7th Caffeine scale) directly under the image to align expectations immediately.</p>
+                            </div>
+                        </div>
+                        <div class="annotation-item green-num">
+                            <div class="annotation-num">3</div>
+                            <div class="annotation-text">
+                                <h4>Sticky Bottom CTA & Mini-Trust Badges</h4>
+                                <p>The CTA locks to the bottom viewport on scroll. Key tags ("Free Shipping" & "30-Day Return") are placed directly under the action button to remove purchase friction.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="design-annotation-list" id="annotation-current" style="display: none;">
+                        <div class="annotation-item">
+                            <div class="annotation-num">1</div>
+                            <div class="annotation-text">
+                                <h4>Bulky Pricing Blocks</h4>
+                                <p>Forces the mobile user to scroll heavily just to compare one-time vs subscription offers, leading to cognitive fatigue.</p>
+                            </div>
+                        </div>
+                        <div class="annotation-item">
+                            <div class="annotation-num">2</div>
+                            <div class="annotation-text">
+                                <h4>Canister Focus Only</h4>
+                                <p>Fails to describe how the mud tastes, leaving users feeling uncertain about the organic flavor.</p>
+                            </div>
+                        </div>
+                        <div class="annotation-item">
+                            <div class="annotation-num">3</div>
+                            <div class="annotation-text">
+                                <h4>Hidden CTA On Scroll</h4>
+                                <p>Once users scroll to read reviews or ingredients, the main checkout pathway disappears completely.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Mobile screen preview -->
+                <div class="content-right">
+                    <!-- Proposed Phone Screen Mockup -->
+                    <div class="phone-container" style="border-color: #242b29;">
+                        <div class="phone-screen" id="comparisonPhoneScreen">
+                            <!-- Header -->
+                            <div class="mock-header">
+                                <span class="mock-logo">MUD\WTR</span>
+                                <span style="font-size: 10px; color: #52796f; font-weight: bold; background: rgba(82, 121, 111, 0.1); padding: 2px 8px; border-radius: 9999px;">Redesign</span>
+                                <span class="mock-menu">☰</span>
+                            </div>
+
+                            <div class="mock-pdp-redesigned">
+                                <div class="mock-img"></div>
+                                <div class="mock-title" style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Rise Cacao Blend</span>
+                                    <span style="font-size: 12px; font-weight: bold; color: #e26a36;">$40.00</span>
+                                </div>
+                                <div class="mock-reviews">★★★★★ <span>14,203 reviews</span></div>
+                                
+                                <!-- Flavor bar (Annotation 2) -->
+                                <div class="mock-flavor-container">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <strong>Taste profile:</strong>
+                                        <span style="color:#e26a36;">Earthy & Cacao Spiced</span>
+                                    </div>
+                                    <div class="mock-flavor-bar">
+                                        <div class="mock-flavor-dot"></div>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; font-size:7px; color:#666;">
+                                        <span>Spiced</span>
+                                        <span>Balanced</span>
+                                        <span>Rich Cacao</span>
+                                    </div>
+                                </div>
+
+                                <!-- Unified Switcher Toggle (Annotation 1) -->
+                                <div class="mock-toggle-container">
+                                    <div class="mock-toggle-btn active" id="mock-tab-sub">Subscribe (Save 33%)</div>
+                                    <div class="mock-toggle-btn" id="mock-tab-one">One-Time ($60)</div>
+                                </div>
+
+                                <div style="font-size: 9px; color:#888; background:#1c1c18; padding:8px; border-radius:6px; border:1px solid #2a2a26;">
+                                    <strong>Starter Kit includes:</strong> 30 servings canister, free electric frother, recipe book, and sticker.
+                                </div>
+
+                                <div style="height: 100px;"></div> <!-- Spacer to allow scroll past sticky bar -->
+
+                                <!-- Sticky Bottom CTA (Annotation 3) -->
+                                <div class="mock-sticky-cta">
+                                    <div class="mock-sticky-price">
+                                        <span class="price">$40.00</span>
+                                        <span class="desc">Chai Starter Kit</span>
+                                    </div>
+                                    <button class="mock-sticky-btn">Secure Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Matrix Grid (Growth Checklist) -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <span class="eyebrow">ACTIONABLE PLAYBOOK</span>
+                    <h2>Growth Execution Plan</h2>
+                    <p>Prioritized action checklist categorized by Conversion Impact and Engineering Effort.</p>
+                </div>
+                <div class="slide-counter-header">05 / 05</div>
+            </div>
+
+            <div class="matrix-grid">
+                <!-- Top-Right: High Impact, Low Effort (Quick Wins) -->
+                <div class="matrix-quadrant orange-accent">
+                    <span class="matrix-label">Priority 1</span>
+                    <h3>⚡ Quick Wins</h3>
+                    <ul class="matrix-list-items">
+                        <li>**Re-align Trust Anchors**: Move "Free Shipping" & "30-Day Guarantee" directly under the primary CTA button.</li>
+                        <li>**Embed Taste/Flavor Meter**: Implement a simple static ingredient scale to quickly describe flavor profile notes.</li>
+                        <li>**Dynamic Review Snippets**: Show 1-2 positive reviews containing terms like "taste," "easy morning routine" near CTA.</li>
+                    </ul>
+                </div>
+
+                <!-- Top-Left: High Impact, High Effort (Strategic Lift) -->
+                <div class="matrix-quadrant green-accent">
+                    <span class="matrix-label">Priority 2</span>
+                    <h3>🚀 Strategic Roadmap</h3>
+                    <ul class="matrix-list-items">
+                        <li>**Unified Pricing Toggle**: Replace bulky pricing blocks with a clean radio-style subscribe/one-time toggle.</li>
+                        <li>**Sticky Bottom Action Bar**: Develop mobile-optimized sticky checkout footer that activates when scrolling past main fold.</li>
+                        <li>**Interactive Ingredient Audit**: Create a modal breakdown detailing functional mushroom benefits (L-Theanine, Lion's Mane).</li>
+                    </ul>
+                </div>
+
+                <!-- Bottom-Right: Low Impact, Low Effort (Polishes) -->
+                <div class="matrix-quadrant">
+                    <span class="matrix-label">Priority 3</span>
+                    <h3>✨ Layout Polishes</h3>
+                    <ul class="matrix-list-items">
+                        <li>**Improve Font Contrast**: Increase font weight on ingredient details list from 300 to 450 to meet mobile readability standards.</li>
+                        <li>**Icon Standardisation**: Replace emojis with clean, uniform vector-based SVG icons.</li>
+                    </ul>
+                </div>
+
+                <!-- Bottom-Left: Low Impact, High Effort (Minor Experiments) -->
+                <div class="matrix-quadrant">
+                    <span class="matrix-label">Priority 4</span>
+                    <h3>🔬 Future Experiments</h3>
+                    <ul class="matrix-list-items">
+                        <li>**Personalization Survey**: Add a 2-step onboarding funnel (e.g. "Do you want focus or energy?") to pre-select starter blends.</li>
+                        <li>**Micro-Animations**: Add subtle CSS hover and transition effects to checkout tags and pricing options.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.slide-deck -->
+
+    <!-- Presentation Navigation -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">←</button>
+        <span class="slide-counter"><span id="current">1</span> / <span id="total">5</span></span>
+        <button class="nav-btn" onclick="nextSlide()">→</button>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        let currentSlideIndex = 1;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > totalSlides) n = totalSlides;
+            currentSlideIndex = n;
+            
+            slides.forEach((s, i) => {
+                s.classList.toggle('active', i === n - 1);
+            });
+            
+            document.getElementById('current').textContent = n;
+            document.getElementById('progressBar').style.width = (n / totalSlides * 100) + '%';
+            
+            // Render specific components depending on slide active
+            if (n === 2) {
+                renderFunnelChart();
+            }
+        }
+
+        function nextSlide() { showSlide(currentSlideIndex + 1); }
+        function prevSlide() { showSlide(currentSlideIndex - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        });
+
+        // Interactive highlight logic (Slide 3)
+        function activateFriction(index, type) {
+            const tabs = document.querySelectorAll('.control-tab');
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index - 1);
+            });
+
+            // Toggle active dashed overlays in phone screen mockup
+            const overlays = document.querySelectorAll('.friction-overlay');
+            overlays.forEach((overlay) => {
+                overlay.classList.remove('active');
+            });
+            const activeOverlay = document.getElementById(`f-overlay-${index}`);
+            if (activeOverlay) {
+                activeOverlay.classList.add('active');
+            }
+        }
+
+        // Current vs Redesign layout comparison switcher logic (Slide 4)
+        function toggleProposedLayout(isProposed) {
+            const btnCurrent = document.getElementById('btn-show-current');
+            const btnProposed = document.getElementById('btn-show-proposed');
+            const noteCurrent = document.getElementById('annotation-current');
+            const noteProposed = document.getElementById('annotation-proposed');
+            const screenContainer = document.getElementById('comparisonPhoneScreen');
+
+            if (isProposed) {
+                btnProposed.classList.add('active');
+                btnCurrent.classList.remove('active');
+                noteProposed.style.display = 'flex';
+                noteCurrent.style.display = 'none';
+                
+                // Show proposed mockup structure
+                screenContainer.innerHTML = `
+                    <div class="mock-header">
+                        <span class="mock-logo">MUD\\WTR</span>
+                        <span style="font-size: 10px; color: #52796f; font-weight: bold; background: rgba(82, 121, 111, 0.1); padding: 2px 8px; border-radius: 9999px;">Redesign</span>
+                        <span class="mock-menu">☰</span>
+                    </div>
+                    <div class="mock-pdp-redesigned">
+                        <div class="mock-img"></div>
+                        <div class="mock-title" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Rise Cacao Blend</span>
+                            <span style="font-size: 12px; font-weight: bold; color: #e26a36;">$40.00</span>
+                        </div>
+                        <div class="mock-reviews">★★★★★ <span>14,203 reviews</span></div>
+                        <div class="mock-flavor-container">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong>Taste profile:</strong>
+                                <span style="color:#e26a36;">Earthy & Cacao Spiced</span>
+                            </div>
+                            <div class="mock-flavor-bar">
+                                <div class="mock-flavor-dot"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:7px; color:#666;">
+                                <span>Spiced</span>
+                                <span>Balanced</span>
+                                <span>Rich Cacao</span>
+                            </div>
+                        </div>
+                        <div class="mock-toggle-container">
+                            <div class="mock-toggle-btn active">Subscribe (Save 33%)</div>
+                            <div class="mock-toggle-btn">One-Time ($60)</div>
+                        </div>
+                        <div style="font-size: 9px; color:#888; background:#1c1c18; padding:8px; border-radius:6px; border:1px solid #2a2a26;">
+                            <strong>Starter Kit includes:</strong> 30 servings canister, free electric frother, recipe book, and sticker.
+                        </div>
+                        <div style="height: 100px;"></div>
+                        <div class="mock-sticky-cta">
+                            <div class="mock-sticky-price">
+                                <span class="price">$40.00</span>
+                                <span class="desc">Chai Starter Kit</span>
+                            </div>
+                            <button class="mock-sticky-btn">Secure Order</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                btnCurrent.classList.add('active');
+                btnProposed.classList.remove('active');
+                noteCurrent.style.display = 'flex';
+                noteProposed.style.display = 'none';
+
+                // Show current mockup structure
+                screenContainer.innerHTML = `
+                    <div class="mock-header">
+                        <span class="mock-logo">MUD\\WTR</span>
+                        <span class="mock-menu">☰</span>
+                    </div>
+                    <div class="mock-pdp-current">
+                        <div class="mock-img"></div>
+                        <div class="mock-title">Rise Cacao Blend</div>
+                        <div class="mock-reviews">★★★★★ <span>14,203 reviews</span></div>
+                        <div class="mock-subtitle">Organic Mushroom Coffee Alternative</div>
+                        <div class="mock-pricing-block">
+                            <div class="mock-price-option selected">
+                                <div>
+                                    <strong>Subscribe & Save</strong><br>
+                                    <span>Starter Kit: 30 servings + Mug + Frother</span>
+                                </div>
+                                <div><strong>$40/mo</strong></div>
+                            </div>
+                            <div class="mock-price-option">
+                                <div>
+                                    <strong>One-Time Purchase</strong><br>
+                                    <span>Canister only (30 servings)</span>
+                                </div>
+                                <div><strong>$60</strong></div>
+                            </div>
+                        </div>
+                        <button class="mock-btn-cta">Add to Cart</button>
+                        <p style="font-size: 8px; color: #666; text-align: center; margin-top: 10px;">Free shipping over $50 • 30-Day Money Back Guarantee</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Funnel chart render logic
+        let funnelChartInstance = null;
+        function renderFunnelChart() {
+            if (funnelChartInstance) return; // Prevent duplicate instantiation
+
+            const ctx = document.getElementById('funnelChart').getContext('2d');
+            funnelChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Traffic Ingestion', 'PDP Engagement', 'Acquisition Loop (ATC)', 'Checkout Start', 'Completed Order'],
+                    datasets: [{
+                        label: 'Funnel Rate (%)',
+                        data: [100, 60, 4.2, 2.1, 1.1],
+                        backgroundColor: [
+                            'rgba(244, 243, 238, 0.1)',
+                            'rgba(244, 243, 238, 0.15)',
+                            'rgba(226, 106, 54, 0.8)', // Friction Drop-Off
+                            'rgba(82, 121, 111, 0.6)',
+                            'rgba(82, 121, 111, 0.8)'
+                        ],
+                        borderColor: [
+                            '#f4f3ee33',
+                            '#f4f3ee55',
+                            '#e26a36', // Highlight
+                            '#52796f55',
+                            '#52796f'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Horizontal bars
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Conversion: ${context.parsed.x}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#383833' },
+                            ticks: { color: '#a19f96', font: { family: 'Raleway' } },
+                            max: 100
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { color: '#f4f3ee', font: { family: 'Raleway', weight: 'bold' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize funnel chart immediately for PDF rendering
+        renderFunnelChart();
+    </script>
+</body>
+</html>
